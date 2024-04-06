@@ -6,7 +6,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required, lookup, usd
+from helpers import apology, login_required, lookup, usd, free_lookup
 
 # Configure application
 app = Flask(__name__)
@@ -25,9 +25,11 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
 
+
+
 # Make sure API key is set
-if not os.environ.get("API_KEY"):
-    raise RuntimeError("API_KEY not set")
+# if not os.environ.get("API_KEY"):
+#     raise RuntimeError("API_KEY not set")
 
 
 @app.after_request
@@ -144,6 +146,7 @@ def buy():
             return apology("shares either negative or 0")
 
         symbol = request.form.get("symbol")
+        free_lookup(symbol)
         if (lookup(symbol)):
             stock = lookup(symbol)
 
@@ -234,8 +237,8 @@ def quote():
 
         symbol = request.form.get("symbol")
 
-        if (lookup(symbol)):
-            symbol_info = lookup(symbol)
+        if (free_lookup(symbol)):
+            symbol_info = free_lookup(symbol)
         else:
             return apology("invalid symbol", 400)
 
