@@ -59,28 +59,7 @@ def lookup(symbol):
     except (KeyError, TypeError, ValueError):
         return None
     
-def free_lookup(symbol):
-    # contact API
-    try: 
-        url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={key}"
-        
-        response = requests.get(url)
-        response.raise_for_status()
-    except requests.RequestException:
-        return None
     
-    # Parse response
-    try:
-        quote = response.json()
-        print(quote)
-        return {
-            "name": quote["Global Quote"]["01. symbol"],
-            "price": float(quote["Global Quote"]["05. price"]),
-            "symbol": quote["Global Quote"]["01. symbol"]
-        }
-    except (KeyError, TypeError, ValueError):
-        return None
-
 def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"

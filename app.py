@@ -1,12 +1,14 @@
 import os
+# import pandas as pd
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
+# from matplotlib import pyplot
 
-from helpers import apology, login_required, lookup, usd, free_lookup
+from helpers import apology, login_required, lookup, usd
 
 # Configure application
 app = Flask(__name__)
@@ -146,7 +148,6 @@ def buy():
             return apology("shares either negative or 0")
 
         symbol = request.form.get("symbol")
-        free_lookup(symbol)
         if (lookup(symbol)):
             stock = lookup(symbol)
 
@@ -237,8 +238,8 @@ def quote():
 
         symbol = request.form.get("symbol")
 
-        if (free_lookup(symbol)):
-            symbol_info = free_lookup(symbol)
+        if (lookup(symbol)):
+            symbol_info = lookup(symbol)
         else:
             return apology("invalid symbol", 400)
 

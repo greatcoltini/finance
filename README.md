@@ -12,15 +12,20 @@
 
 ## QUOTE PAGE
 - grabs quote of the requested stock from the API
+![alt text](assets/image-1.png)
+
 
 ## BUY PAGE
 - buys stock at the current price based off of API call
+![alt text](assets/image-2.png)
 
 ## SELL PAGE
 - sells stock at the current price based off of API call
 
 ## HISTORY PAGE
 - contains history of transactions
+
+![alt text](assets/image.png)
 
 
 # PROJECT INSTALL AND RUNNING
